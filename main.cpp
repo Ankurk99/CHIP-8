@@ -1,8 +1,9 @@
 
-#include "CHIP8.h"
+#include "chip8.h"
 
 int main(int argc, char **argv) {
-  CHIP8 core("path to the code");
+  chip8 core;
+  core.load_program("path to file");
 
   for (;;) {
     core.emulate_cycle();
