@@ -150,8 +150,9 @@ int chip8::emulate_cycle() {
   case 0x9000:
     // TODO: 9XY0
     break;
-  case 0xA000:
-    // TODO: ANNN
+  case 0xA000: // 0xANNN: Sets I to the address NNN.
+    I = opcode & 0x0FFF;
+    pc += 2;
     break;
   case 0xB000:
     // TODO: BNNN
