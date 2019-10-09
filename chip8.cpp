@@ -98,8 +98,12 @@ int chip8::emulate_cycle() {
   case 0x2000:
     // TODO: 2NNN
     break;
-  case 0x3000:
-    // TODO: 3XNN
+  case 0x3000: // 0x3XNN: Skips the next instruction if VX equals NN. (Usually
+               // the next instruction is a jump to skip a code block)
+    if (V[opcode & 0x0F00 >> 8] == opcode & 0x00FF)
+      pc += 4;
+    else
+      pc += 2;
     break;
   case 0x4000:
     // TODO: 4XNN
