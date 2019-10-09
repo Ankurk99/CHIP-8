@@ -112,8 +112,12 @@ int chip8::emulate_cycle() {
     else
       pc += 2;
     break;
-  case 0x5000:
-    // TODO: 5XY0
+  case 0x5000: // 0x5XY0: Skips the next instruction if VX equals VY. (Usually
+               // the next instruction is a jump to skip a code block)
+    if (V[opcode & 0x0F00 >> 8] == V[opcode & 0x00F0 >> 4])
+      pc += 4;
+    else
+      pc += 2;
     break;
   case 0x6000:
     // TODO: 6XNN
