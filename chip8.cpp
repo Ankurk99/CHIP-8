@@ -78,43 +78,140 @@ void chip8::load_program(char filepath[]) {
 int chip8::emulate_cycle() {
   opcode = memory[pc] << 8 | memory[pc + 1];
   switch (opcode & 0xF000) {
-  // TODO: 0NNN
-  // TODO: 00E0
-  // TODO: 00EE
-  // TODO: 1NNN
-  // TODO: 2NNN
-  // TODO: 3XNN
-  // TODO: 4XNN
-  // TODO: 5XY0
-  // TODO: 6XNN
-  // TODO: 7XNN
-  // TODO: 8XY0
-  // TODO: 8XY1
-  // TODO: 8XY2
-  // TODO: 8XY3
-  // TODO: 8XY4
-  // TODO: 8XY5
-  // TODO: 8XY6
-  // TODO: 8XY7
-  // TODO: 8XYE
-  // TODO: 9XY0
-  // TODO: ANNN
-  // TODO: BNNN
-  // TODO: CXNN
-  // TODO: DXYN
-  // TODO: EX9E
-  // TODO: EXA1
-  // TODO: FX15
-  // TODO: FX18
-  // TODO: FX1E
-  // TODO: FX29
-  // TODO: FX33
-  // TODO: FX55
-  // TODO: FX65
+  case 0x0000:
+    switch (opcode & 0x000F) {
+    case 0x0000: // 0x00E0: clears the screen
+      for (int i = 0; i < 2064; i++)
+        gfx[i] = 0x0;
+      draw_flag = true;
+      break;
+    case 0x000E: // 0x00EE: returns from a subroutine
+                 // TODO 0x00EE
+      break;
+    default:
+      cout << "Invalid opcode";
+      break;
+    }
+  case 0x1000:
+    // TODO: 1NNN
+    break;
+  case 0x2000:
+    // TODO: 2NNN
+    break;
+  case 0x3000:
+    // TODO: 3XNN
+    break;
+  case 0x4000:
+    // TODO: 4XNN
+    break;
+  case 0x5000:
+    // TODO: 5XY0
+    break;
+  case 0x6000:
+    // TODO: 6XNN
+    break;
+  case 0x7000:
+    // TODO: 7XNN
+    break;
+  case 0x8000:
+    switch (opcode & 0x000F) {
+    case 0x0000:
+      // TODO: 8XY0
+      break;
+    case 0x0001:
+      // TODO: 8XY1
+      break;
+    case 0x0002:
+      // TODO: 8XY2
+      break;
+    case 0x0003:
+      // TODO: 8XY3
+      break;
+    case 0x0004:
+      // TODO: 8XY4
+      break;
+    case 0x0005:
+      // TODO: 8XY5
+      break;
+    case 0x0006:
+      // TODO: 8XY6
+      break;
+    case 0x0007:
+      // TODO: 8XY7
+      break;
+    case 0x000E:
+      // TODO: 8XYE
+      break;
+
+    default:
+      cout << "Invalid opcode";
+      break;
+    }
+  case 0x9000:
+    // TODO: 9XY0
+    break;
+  case 0xA000:
+    // TODO: ANNN
+    break;
+  case 0xB000:
+    // TODO: BNNN
+    break;
+  case 0xC000:
+    // TODO: CXNN
+    break;
+  case 0xD000:
+    // TODO: DXYN
+    break;
+  case 0xE000:
+    switch (opcode & 0x00FF) {
+    case 0x009E:
+      // TODO: EX9E
+      break;
+    case 0x00A1:
+      // TODO: EXA1
+      break;
+    default:
+      cout << "Invalid opcode";
+      break;
+    }
+    break;
+  case 0xF000:
+    switch (opcode & 0x0FF) {
+    case 0x0015:
+      // TODO: FX15
+      break;
+    case 0x0018:
+      // TODO: FX18
+      break;
+    case 0x001E:
+      // TODO: FX1E
+      break;
+    case 0x0029:
+      // TODO: FX29
+      break;
+    case 0x0033:
+      // TODO: FX33
+      break;
+    case 0x0055:
+      // TODO: FX55
+      break;
+    case 0x0065:
+      // TODO: FX65
+      break;
+    default:
+      cout << "Invaild opcode";
+      break;
+    }
   default:
     cout << "Invalid opcode";
     break;
   }
-  // TODO: delay timer
-  // TODO: sound timer
+  if (delay_timer > 0)
+    --delay_timer;
+
+  if (sound_timer > 0) {
+    if (sound_timer == 1)
+      printf("BEEP!\n");
+    --sound_timer;
+  }
 }
