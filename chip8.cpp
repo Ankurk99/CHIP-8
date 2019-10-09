@@ -92,8 +92,8 @@ int chip8::emulate_cycle() {
       cout << "Invalid opcode";
       break;
     }
-  case 0x1000:
-    // TODO: 1NNN
+  case 0x1000: // 0x1NNN: Jumps to address NNN
+    pc = opcode & 0x0FFF;
     break;
   case 0x2000:
     // TODO: 2NNN
