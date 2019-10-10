@@ -92,20 +92,32 @@ int chip8::emulate_cycle() {
       cout << "Invalid opcode";
       break;
     }
-  case 0x1000:
-    // TODO: 1NNN
+  case 0x1000: // 0x1NNN: Jumps to address NNN
+    pc = opcode & 0x0FFF;
     break;
   case 0x2000:
     // TODO: 2NNN
     break;
-  case 0x3000:
-    // TODO: 3XNN
+  case 0x3000: // 0x3XNN: Skips the next instruction if VX equals NN. (Usually
+               // the next instruction is a jump to skip a code block)
+    if (V[opcode & 0x0F00 >> 8] == opcode & 0x00FF)
+      pc += 4;
+    else
+      pc += 2;
     break;
-  case 0x4000:
-    // TODO: 4XNN
+  case 0x4000: // 0x4XNN: Skips the next instruction if VX doesn't equal NN.
+               // (Usually the next instruction is a jump to skip a code block)
+    if (V[opcode & 0x0F00 >> 8] != opcode & 0x00FF)
+      pc += 4;
+    else
+      pc += 2;
     break;
-  case 0x5000:
-    // TODO: 5XY0
+  case 0x5000: // 0x5XY0: Skips the next instruction if VX equals VY. (Usually
+               // the next instruction is a jump to skip a code block)
+    if (V[opcode & 0x0F00 >> 8] == V[opcode & 0x00F0 >> 4])
+      pc += 4;
+    else
+      pc += 2;
     break;
   case 0x6000:
     // TODO: 6XNN
@@ -150,8 +162,9 @@ int chip8::emulate_cycle() {
   case 0x9000:
     // TODO: 9XY0
     break;
-  case 0xA000:
-    // TODO: ANNN
+  case 0xA000: // 0xANNN: Sets I to the address NNN.
+    I = opcode & 0x0FFF;
+    pc += 2;
     break;
   case 0xB000:
     // TODO: BNNN
