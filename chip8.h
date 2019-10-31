@@ -17,7 +17,7 @@ class chip8 {
 public:
   bool draw_flag;
   unsigned char key[16];      // key state
-  unsigned char gfx[64 * 32]; // screen
+  unsigned char gfx[64 * 32]; // screen resolution
 
   chip8();
   int emulate_cycle();
