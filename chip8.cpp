@@ -216,16 +216,34 @@ int chip8::emulate_cycle() {
     // execution of this instruction. As described above, VF is set to 1 if any
     // screen pixels are flipped from set to unset when the sprite is drawn, and
     // to 0 if that doesn’t happen
-    // TO DO
+    unsigned short x = V[(opcode & 0x0F00) >> 8];
+    unsigned short y = V[(opcode & 0x00F0) >> 4];
+    unsigned short height = opcode & 0x000F;
+    unsigned short pixel;
+
+    V[0xF] = 0;
+    for( int yline = 0; yline < height ; yline++){
+      pixel = memory[I + yline];
+      for(int xline = 0; xline < 8; xline++){
+        if ((pixel & (0x80 >> xline)) != 0){
+          if (gfx[(x + xline + ((y + yline) * 64))] == 1)
+            V[0xF] = 1;
+          gfx[x+ xline + ((y + yline) * 64)] ^= 1;
+        }
+      }
+    }
+
+    draw_flag = true;
+    pc += 2;
     break;
   case 0xE000:
     switch (opcode & 0x00FF) {
-    case 0x009E:
-      // TODO: EX9E
+    case 0x009E: // EX9E: Skips the next instruction if the key stored in VX is pressed. (Usually the next instruction is a jump to skip a code block)
+
       break;
     case 0x00A1:
       // TODO: EXA1
-      break;
+      break;:
     default:
       cout << "Invalid opcode";
       break;
