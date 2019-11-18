@@ -1,0 +1,35 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+I	chip8.h	/^  unsigned short I;    \/\/ Index register$/;"	m	class:chip8
+SCREEN_HEIGHT	sdl.cpp	5;"	d	file:
+SCREEN_WIDTH	sdl.cpp	4;"	d	file:
+V	chip8.h	/^  unsigned char V[16]; \/\/ V-regs (V0-VF)$/;"	m	class:chip8
+chip8	chip8.cpp	/^chip8::chip8() {$/;"	f	class:chip8
+chip8	chip8.h	/^class chip8 {$/;"	c
+cleanup	sdl.cpp	/^void sdl::cleanup() {$/;"	f	class:sdl
+clearScreen	sdl.cpp	/^void sdl::clearScreen() { SDL_RenderClear(renderer); }$/;"	f	class:sdl
+delay_timer	chip8.h	/^  unsigned char delay_timer;$/;"	m	class:chip8
+drawGraphics	main.cpp	/^void drawGraphics(unsigned char gfx[]) {$/;"	f
+drawPixel	sdl.cpp	/^void sdl::drawPixel(int x, int y) { SDL_RenderDrawPoint(renderer, x, y); }$/;"	f	class:sdl
+draw_flag	chip8.h	/^  bool draw_flag;$/;"	m	class:chip8
+emulate_cycle	chip8.cpp	/^int chip8::emulate_cycle() {$/;"	f	class:chip8
+gfx	chip8.h	/^  unsigned char gfx[64 * 32]; \/\/ screen resolution$/;"	m	class:chip8
+initSDL	sdl.cpp	/^void sdl::initSDL(void) {$/;"	f	class:sdl
+key	chip8.h	/^  unsigned char key[16];      \/\/ key state$/;"	m	class:chip8
+load_program	chip8.cpp	/^void chip8::load_program(char filepath[]) {$/;"	f	class:chip8
+main	main.cpp	/^int main(int argc, char **argv) {$/;"	f
+memory	chip8.h	/^  unsigned char memory[4096];$/;"	m	class:chip8
+opcode	chip8.h	/^  unsigned short opcode; \/\/ current opcode$/;"	m	class:chip8
+pc	chip8.h	/^  unsigned short pc;   \/\/ program counter$/;"	m	class:chip8
+present	sdl.cpp	/^void sdl::present() { SDL_RenderPresent(renderer); }$/;"	f	class:sdl
+renderer	sdl.h	/^  SDL_Renderer *renderer;$/;"	m	class:sdl
+screen	main.cpp	/^sdl screen;$/;"	v
+sdl	sdl.h	/^class sdl {$/;"	c
+sound_timer	chip8.h	/^  unsigned char sound_timer;$/;"	m	class:chip8
+sp	chip8.h	/^  unsigned short sp;$/;"	m	class:chip8
+stack	chip8.h	/^  unsigned short stack[16];$/;"	m	class:chip8
+window	sdl.h	/^  SDL_Window *window;$/;"	m	class:sdl
