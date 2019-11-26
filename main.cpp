@@ -15,17 +15,22 @@ void drawGraphics(unsigned char gfx[]) {
   screen.present();
 }
 
-void setKeys(unsigned char keys[]){
+// setKeys set's the key[] when a key is pressed
+void setKeys(unsigned char keys[]) {
+  // clear keys
+  for (int i = 0; i < 16; i++) {
+    key[i] = 0;
+  }
   SDL_Event event;
 
-  while(SDL_PollEvent(&event)) {
+  while (SDL_PollEvent(&event)) {
     switch (event.type) {
     case SDL_QUIT:
       exit(0);
       break;
 
     case SDL_KEYDOWN:
-      switch(event.key.keysm.sym){
+      switch (event.key.keysm.sym) {
       case SDLK_1:
         key[0x1] = 1;
         break;
