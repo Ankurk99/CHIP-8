@@ -1,1 +1,5 @@
+bin/
+*.o
+chip
+*.c8
 tags

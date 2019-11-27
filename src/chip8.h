@@ -1,3 +1,5 @@
+#include <stdint.h>
+
 class chip8 {
   // chip8 have 35 opcodes, each of one is 2 bytes long
   // an unsigned short has the length of 2 bytes
@@ -16,10 +18,12 @@ class chip8 {
 
 public:
   bool draw_flag;
-  unsigned char key[16];      // key state
-  unsigned char gfx[64 * 32]; // screen resolution
+  unsigned char key[16]; // key state
+  uint32_t gfx[64 * 32]; // screen resolution
 
   chip8();
-  int emulate_cycle();
+  ~chip8();
+  void init();
+  void emulate_cycle();
   void load_program(char filepath[]);
 };
